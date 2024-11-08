@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="/public/style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="admin-dashboard">
+        <h1>Admin Dashboard</h1>
+        <div class="patient-management">
+            <h2>Manage Patients</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% patients.forEach(patient => { %>
+                        <tr>
+                            <td>
+                                <%= patient.id %>
+                            </td>
+                            <td>
+                                <%= patient.first_name %>
+                                    <%= patient.last_name %>
+                            </td>
+                            <td>
+                                <%= patient.email %>
+                            </td>
+                            <td>
+                                <%= patient.phone %>
+                            </td>
+                            <td>
+                                <!-- Corrected the onclick handlers by wrapping patient.id in quotes if it's a string -->
+                                <button class="edit-btn" onclick="editPatient('<%= patient.id %>')">Edit</button>
+                                <button class="delete-btn" onclick="deletePatient('<%= patient.id %>')">Delete</button>
+                            </td>
+                        </tr>
+                        <% }) %>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="doctor-management">
+            <h2>Manage Doctors</h2>
+            <form id="addDoctorForm">
+                <label for="doctorName">Doctor Name:</label>
+                <input type="text" id="doctorName" name="name" required>
+                <<!DOCTYPE html>
+                    <html lang="en">
+
+                    <head>
+                        <meta charset="UTF-8">
+                        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                        <title>Admin Dashboard</title>
+                        <link rel="stylesheet" href="/public/style.css">
+                        <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet">
+                    </head>
+
+                    <body>
+                        <div class="admin-dashboard">
+                            <h1>Admin Dashboard</h1>
+
+                            <!-- Patient Management Section -->
+                            <div class="patient-management">
+                                <h2>Manage Patients</h2>
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>Name</th>
+                                            <th>Email</th>
+                                            <th>Phone</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <% patients.forEach(patient => { %>
+                                            <tr>
+                                                <td>
+                                                    <%= patient.id %>
+                                                </td>
+                                                <td>
+                                                    <%= patient.first_name %>
+                                                        <%= patient.last_name %>
+                                                </td>
+                                                <td>
+                                                    <%= patient.email %>
+                                                </td>
+                                                <td>
+                                                    <%= patient.phone %>
+                                                </td>
+                                                <td>
+                                                    <button class="edit-btn" onclick="editPatient('<%= patient.id %>')">Edit</button>
+                                                    <button class="delete-btn" onclick="deletePatient('<%= patient.id %>')">Delete</button>
+                                                </td>
+                                            </tr>
+                                            <% }) %>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <!-- Doctor Management Section -->
+                            <div class="doctor-management">
+                                <h2>Manage Doctors</h2>
+                                <form id="addDoctorForm">
+                                    <label for="doctorName">Doctor Name:</label>
+                                    <input type="text" id="doctorName" name="name" required>
+                                    <label for="specialization">Specialization:</label>
+                                    <input type="text" id="specialization" name="specialization" required>
+                                    <label for="availability">Availability:</label>
+                                    <input type="text" id="availability" name="availability" required>
+                                    <button type="submit">Add Doctor</button>
+                                </form>
+
+                                <div id="doctorList">
+                                    <% doctors.forEach(doctor => { %>
+                                        <div class="doctor-item">
+                                            <p>
+                                                <%= doctor.name %> -
+                                                    <%= doctor.specialization %> -
+                                                        <%= doctor.availability %>
+                                            </p>
+                                            <button onclick="deleteDoctor('<%= doctor.id %>')">Delete</button>
+                                        </div>
+                                        <% }) %>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Scripts -->
+                        <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+                        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+                        <script>
+                            // Toastr Configuration
+                            toastr.options = {
+                                "positionClass": "toast-top-right",
+                                "timeOut": "3000"
+                            };
+
+                            // Edit Patient Function
+                            function editPatient(patientId) {
+                                toastr.info('Edit functionality is under development.');
+                            }
+
+                            // Delete Patient Function
+                            function deletePatient(patientId) {
+                                $.ajax({
+                                    url: `/admin/patients/delete/${patientId}`,
+                                    method: 'DELETE',
+                                    success: function() {
+                                        toastr.success('Patient deleted successfully');
+                                        location.reload();
+                                    },
+                                    error: function() {
+                                        toastr.error('Error deleting patient');
+                                    }
+                                });
+                            }
+
+                            // Delete Doctor Function
+                            function deleteDoctor(doctorId) {
+                                $.ajax({
+                                    url: `/admin/doctors/delete/${doctorId}`,
+                                    method: 'DELETE',
+                                    success: function() {
+                                        toastr.success('Doctor deleted successfully');
+                                        location.reload();
+                                    },
+                                    error: function() {
+                                        toastr.error('Error deleting doctor');
+                                    }
+                                });
+                            }
+
+                            // Add Doctor Form Submission
+                            $('#addDoctorForm').submit(function(e) {
+                                e.preventDefault();
+                                const name = $('#doctorName').val();
+                                const specialization = $('#specialization').val();
+                                const availability = $('#availability').val();
+
+                                $.ajax({
+                                    url: '/admin/doctors/add',
+                                    method: 'POST',
+                                    data: {
+                                        name,
+                                        specialization,
+                                        availability
+                                    },
+                                    success: function() {
+                                        toastr.success('Doctor added successfully');
+                                        $('#addDoctorForm')[0].reset();
+                                        location.reload();
+                                    },
+                                    error: function() {
+                                        toastr.error('Error adding doctor');
+                                    }
+                                });
+                            });
+                        </script>
+                    </body>
+
+                    </html>
+                    label for="specialization">Specialization:</label>
+                    <input type="text" id="specialization" name="specialization" required>
+                    <label for="availability">Availability:</label>
+                    <input type="text" id="availability" name="availability" required>
+                    <button type="submit">Add Doctor</button>
+            </form>
+            <div id="doctorList">
+                <% doctors.forEach(doctor => { %>
+                    <div class="doctor-item">
+                        <p>
+                            <%= doctor.name %> -
+                                <%= doctor.specialization %> -
+                                    <%= doctor.availability %>
+                        </p>
+                        <!-- Corrected the onclick handler for deleteDoctor -->
+                        <button onclick="deleteDoctor('<%= doctor.id %>')">Delete</button>
+                    </div>
+                    <% }) %>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        function editPatient(patientId) {
+            // Implement edit functionality (show modal, etc.)
+            toastr.info('Edit functionality is under development.');
+        }
+
+        function deletePatient(patientId) {
+            $.ajax({
+                url: `/admin/patients/delete/${patientId}`,
+                method: 'DELETE',
+                success: function() {
+                    toastr.success('Patient deleted successfully');
+                    location.reload();
+                },
+                error: function() {
+                    toastr.error('Error deleting patient');
+                }
+            });
+        }
+
+        function deleteDoctor(doctorId) {
+            $.ajax({
+                url: `/admin/doctors/delete/${doctorId}`,
+                method: 'DELETE',
+                success: function() {
+                    toastr.success('Doctor deleted successfully');
+                    location.reload();
+                },
+                error: function() {
+                    toastr.error('Error deleting doctor');
+                }
+            });
+        }
+
+        // Add Doctor Form Submission
+        $('#addDoctorForm').submit(function(e) {
+            e.preventDefault();
+            const name = $('#doctorName').val();
+            const specialization = $('#specialization').val();
+            const availability = $('#availability').val();
+
+            $.ajax({
+                url: '/admin/doctors/add',
+                method: 'POST',
+                data: {
+                    name,
+                    specialization,
+                    availability
+                },
+                success: function() {
+                    toastr.success('Doctor added successfully');
+                    $('#addDoctorForm')[0].reset();
+                    location.reload();
+                },
+                error: function() {
+                    toastr.error('Error adding doctor');
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

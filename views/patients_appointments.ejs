@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Upcoming Appointments</title>
+</head>
+<body>
+    <h2>Welcome, <%= user.first_name %>!</h2>
+
+    <h3>Your Upcoming Appointments</h3>
+
+    <% if (appointments.length > 0) { %>
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>Doctor Name</th>
+                    <th>Specialization</th>
+                    <th>Appointment Date</th>
+                    <th>Appointment Time</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% appointments.forEach(function(appointment) { %>
+                    <tr>
+                        <td><%= appointment.doctor_name %></td>
+                        <td><%= appointment.specialization %></td>
+                        <td><%= appointment.appointment_date %></td>
+                        <td><%= appointment.appointment_time %></td>
+                    </tr>
+                <% }); %>
+            </tbody>
+        </table>
+    <% } else { %>
+        <p>You have no upcoming appointments.</p>
+    <% } %>
+    
+    <a href="/logout">Logout</a>
+</body>
+</html>

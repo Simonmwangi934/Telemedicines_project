@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Appointment</title>
+</head>
+
+<body>
+ 
+
+    <h3>Book an Appointment</h3>
+
+    <!-- Form to book an appointment -->
+    <form action="/appointments" method="POST">
+        <div>
+            <label for="doctor-select">Select Doctor:</label>
+            <select id="doctor-select" name="doctor_id" required>
+                <option value="">-- Select a Doctor --</option>
+                <% doctors.forEach(function(doctor) { %> <!-- Loop through each doctor -->
+                    <option value="<%= doctor.Doctor_id %>"> <!-- Correctly reference doctor properties -->
+                        <%= doctor.Names %> - <%= doctor.specialization %>
+                    </option>
+                <% }); %>
+            </select>
+        </div>
+        
+
+        <div>
+            <label for="appointment-date">Appointment Date:</label>
+            <input type="date" id="appointment-date" name="appointment_date" required />
+        </div>
+
+        <div>
+            <label for="appointment-time">Appointment Time:</label>
+            <input type="time" id="appointment-time" name="appointment_time" required />
+        </div>
+
+        <input type="hidden" name="patient_id" value="<%= user.id %>" /> <!-- Patient's ID from session -->
+        
+        <button type="submit">Book Appointment</button>
+    </form>
+
+    <br />
+    <a href="/logout">Logout</a>
+</body>
+
+</html>

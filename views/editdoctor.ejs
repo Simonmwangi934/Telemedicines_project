@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        <%= title %>
+    </title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+
+<body>
+    <div class="container">
+        <h1>
+            <%= title %>
+        </h1>
+        <form action="/doctor/update/<%= editdoctor.Doctor_id %>" method="POST">
+            <div>
+                <label>Name:</label>
+                <input type="text" name="name" value="<%=editdoctor.Names%>" required>
+            </div>
+            <div>
+                <label>Email:</label>
+                <input type="email" name="email" value="<%=editdoctor.email%>" required>
+            </div>
+            <div>
+                <label>Phone:</label>
+                <input type="text" name="phone" value="<%=editdoctor.phone%>" required>
+            </div>
+            <div>
+                <label>Specialization:</label>
+                <input type="text" name="specialization" value="<%=editdoctor.specialization%>" required>
+            </div>
+            <div>
+                <label>Availability:</label>
+                <input type="text" name="availability" value="<%=editdoctor.availability%>" required>
+            </div>
+            <div>
+                <label>Start Time:</label>
+                <input type="time" name="start_time" value="<%=editdoctor.start_time%>" required>
+            </div>
+            <div>
+                <label>End Time:</label>
+                <input type="time" name="end_time" value="<%=editdoctor.end_time%>" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Update Doctor</button>
+        </form>
+        <a href="/doctor"><button class="btn btn-secondary">Back to List</button></a>
+    </div>
+</body>
+
+</html>
