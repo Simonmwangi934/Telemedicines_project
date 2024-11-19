@@ -5,13 +5,14 @@ const dotenv = require("dotenv").config();
 const cors = require("cors");
 const path = require("path");
 //import route  paths
+const appointmentRoutes = require("./routes/appointment");
 const patientRoutes = require("./routes/patients"); // Import patient routes
 const loginRoutes = require("./routes/login"); // Import login routes
 const mainRoutes = require("./routes/main"); // Import main form routes
 const doctorsRoutes = require("./routes/doctors"); // Import main form routes
 // Initialize Express app
 const app = express();
-const port = 606; // Port for the server
+const port = 659; // Port for the server
 const session = require('express-session');
 
 // Configure session middleware
@@ -70,6 +71,7 @@ app.use("/patients", patientRoutes); // Route group for all patient-related rout
 app.use("/login", loginRoutes); // Route group for all login-related routes
 app.use("/main", mainRoutes); // Route group for all home form routes
 app.use("/doctor", doctorsRoutes);
+app.use("/appointment", appointmentRoutes);
 
 // Export the app for testing or further configurations if needed
 module.exports = app;

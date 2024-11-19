@@ -114,6 +114,23 @@ router.get('/patients/appointments', async(req, res) => {
 
 // Admin route (GET) – assuming only admins can access
 router.get("/admin", (req, res) => {
-    res.render("admin"); // Render the patients.ejs file
+    res.render("admin"); // Render the admin.ejs file
 });
+// Route to display the list of patients
+router.get("/lists", function(req, res, next) {
+    const query = "SELECT * FROM  patients ORDER BY patient_id DESC";
+
+    req.db.query(query, function(error, data) {
+        if (error) {
+            throw error; // You may want to handle errors more gracefully
+        } else {
+            res.render('patients_list', {
+                title: 'Patients List', // Set a title for the page
+                action: 'list',
+                patients_list: data // Correct variable name here
+            });
+        }
+    });
+});
+
 module.exports = router;

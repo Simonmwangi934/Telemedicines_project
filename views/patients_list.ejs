@@ -16,14 +16,14 @@
             <%= title %>
         </h1>
         <a href="/register" class="btn btn-success">Add Doctor</a>
-        <!-- Updated button -->
+
 
         <% if (action==='add' ) { %>
-            <!-- Additional code for 'add' action goes here -->
+
             <% } else { %>
                 <div class="display-header">
                     <div class="row">
-                        <!-- Any header info or buttons can go here -->
+
                     </div>
                 </div>
                 <div class="display-header">
@@ -31,52 +31,50 @@
                         <table class="table table-bordered">
                             <thead>
                                 <tr>
-                                    <th>Name</th>
+                                    <th>Firstname</th>
+                                    <th>Lastname</th>
                                     <th>Email</th>
+                                    <th>Date of Birth</th>
                                     <th>Phone</th>
-                                    <th>Specialization</th>
-                                    <th>Availability</th>
-                                    <th>Start Time</th>
-                                    <th>End Time</th>
+                                    <th>Gender</th>
+                                    <th>Address</th>
                                     <th>Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <% if (patients_list.length > 0) { 
-        patients_list.forEach(function(doctor) { %>
+        patients_list.forEach(function(patients) { %>
                                     <tr>
                                         <td>
-                                            <%= doctor.Names %>
+                                            <%=patients.first_name %>
                                         </td>
                                         <td>
-                                            <%= doctor.email %>
+                                            <%=patients.last_name %>
                                         </td>
                                         <td>
-                                            <%= doctor.phone %>
+                                            <%=patients.email %>
                                         </td>
                                         <td>
-                                            <%= doctor.specialization %>
+                                            <%=patients.date_of_birth %>
                                         </td>
                                         <td>
-                                            <%= doctor.availability %>
+                                            <%=patients.phone %>
                                         </td>
                                         <td>
-                                            <%= doctor.start_time %>
+                                            <%=patients.gender %>
                                         </td>
                                         <td>
-                                            <%= doctor.end_time %>
+                                            <%=patients.address %>
                                         </td>
+
                                         <td>
                                             <div class="action-buttons">
-                                                <a href="/doctor/edit/<%= doctor.Doctor_id %>" class="btn btn-primary btn-sm">Edit</a>
+                                                <a href="/patients/edit/<%= patients.patient_id %>" class="btn btn-primary btn-sm">Edit</a>
                                                 <!-- Delete link -->
-                                                <a href="/doctor/delete/<%= doctor.Doctor_id %>" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this doctor?');">
+                                                <a href="/patients/edit/<%= patients.patient_id %>" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this doctor?');">
             Delete
         </a>
-                                                <!-- Form to deactivate doctor profile -->
-                                                <form action="/doctor/deactivate/<%= doctor.Doctor_id %>" method="POST" style="display:inline;">
-                                                    <button type="submit" class="btn btn-warning btn-sm">Deactivate</button>
-                                                </form>
+
 
                                             </div>
                                         </td>

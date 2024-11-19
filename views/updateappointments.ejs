@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Appointment</title>
+</head>
+
+<body>
+
+
+    <h3>Book an Appointment</h3>
+
+    <!-- Form to update an appointment -->
+    <label for="appointment-date">Appointment Date:</label>
+    <input type="text" name="appointment-date" value="<%=updateappointments.appointment_date%>" required>
+    </div>
+
+    <div>
+        <label for="appointment-time">Appointment Time:</label>
+        <input type="text" name="appointment-time" value="<%=updateappointments.appointment_time%>" required>
+
+    </div>
+
+    <input type="hidden" name="Appointments_id" value="<%= user.id %>" />
+
+
+    <button type="submit">Reschdule Appointment</button>
+    </form>
+
+    <br />
+    <a href="/logout">Logout</a>
+</body>
+
+</html>

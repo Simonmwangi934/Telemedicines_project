@@ -21,7 +21,7 @@ router.get("/edit/:id", function(req, res, next) {
         if (data.length > 0) {
             res.render('editdoctor', {
                 title: 'Edit Doctor', // Title for the edit page
-                editdoctor: data[0] // Send the first (and only) doctor object
+                editdoctor: data[0]
             });
         } else {
             console.log('Doctor not found'); // Log if the doctor is not found
@@ -65,16 +65,16 @@ router.delete("/delete/:id", (req, res) => {
 
 // Route to display the list of doctors
 router.get("/", function(req, res, next) {
-    const query = "SELECT * FROM Doctors ORDER BY Doctor_id DESC";
+    const query = "SELECT * FROM doctor ORDER BY Doctor_id DESC";
 
     req.db.query(query, function(error, data) {
         if (error) {
-            throw error; // You may want to handle errors more gracefully
+            throw error;
         } else {
             res.render('doctorslist', {
                 title: 'Doctors List', // Set a title for the page
                 action: 'list',
-                doctorslist: data // Correct variable name here
+                doctorslist: data
             });
         }
     });
@@ -145,7 +145,7 @@ router.post("/deactivate/:id", (req, res) => {
 // Route to delete a doctor using DELETE
 router.delete("/delete/:id", function(request, response) {
     var id = request.params.id;
-    var query = "DELETE FROM doctor WHERE Doctor_id = ?"; // Ensure query is safe
+    var query = "DELETE FROM doctor WHERE Doctor_id = ?";
 
     // Use req.db instead of db
     request.db.query(query, [id], function(error, data) {
@@ -158,14 +158,14 @@ router.delete("/delete/:id", function(request, response) {
 });
 
 // Route to fetch upcoming appointments for a doctor
-router.get('/doctor/appointments', async (req, res) => {
-    const user = req.session.user;  // Assuming user info is stored in session
-    
+router.get('/doctor/appointments', async(req, res) => {
+    const user = req.session.user; // Assuming user info is stored in session
+
     if (!user) {
         return res.redirect('/login'); // Redirect to login if user is not logged in
     }
 
-    const doctor_id = user.id;  // Get the doctor's id from session
+    const doctor_id = user.id; // Get the doctor's id from session
 
     try {
         // Query to fetch upcoming appointments for the doctor

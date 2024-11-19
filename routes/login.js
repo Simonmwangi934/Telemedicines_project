@@ -37,10 +37,11 @@ router.post('/credentials', async(req, res) => {
             const isMatch = await bcrypt.compare(password, user.password_hash);
 
             if (isMatch) {
-                // Optionally, you can set a session or token here for authenticated users
+
                 req.session.user = { id: user.id, name: user.first_name, email: user.email };
 
-                return res.redirect('/appointments');             } else {
+                return res.redirect('/main/main');
+            } else {
                 return res.status(401).send('Invalid email or password');
             }
         });
