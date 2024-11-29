@@ -35,20 +35,35 @@ router.post('/credentials', async(req, res) => {
 
             // Compare provided password with stored hashed password
             const isMatch = await bcrypt.compare(password, user.password_hash);
-
             if (isMatch) {
-
-                req.session.user = { id: user.id, name: user.first_name, email: user.email };
-
-                return res.redirect('/main/main');
+                // Set user session with id, first name, last name, and email
+                req.session.user = {
+                    id: user.id,
+                    first_name: user.first_name,
+                    last_name: user.last_name,
+                    email: user.email
+                };
+                return res.redirect('/main/main'); // Redirect to the main dashboard
             } else {
+                // If password doesn't match
                 return res.status(401).send('Invalid email or password');
             }
+
         });
     } catch (error) {
         console.error('Error during login process:', error);
         res.status(500).send('Internal server error');
     }
+});
+//logout
+router.get('/logout', (req, res) => {
+    req.session.destroy((err) => {
+        if (err) {
+            console.error('Error during logout:', err);
+            return res.status(500).send('Logout failed');
+        }
+        res.redirect('/'); // Redirect to login page after logout
+    });
 });
 
 module.exports = router;

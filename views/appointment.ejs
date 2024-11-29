@@ -5,44 +5,52 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Book Appointment</title>
+    <link rel="stylesheet" href="/style.css">
+
 </head>
 
 <body>
 
 
-    <h3>Book an Appointment</h3>
+
 
     <!-- Form to book an appointment -->
-    <form action="/appointments" method="POST">
-        <div>
-            <label for="doctor-select">Select Doctor:</label>
-            <select id="doctor-select" name="doctor_id" required>
-                <option value="">-- Select a Doctor --</option>
-                <% doctors.forEach(function(doctor) { %> <!-- Loop through each doctor -->
-                    <option value="<%= doctor.Doctor_id %>"> 
-                        <%= doctor.Names %> - <%= doctor.specialization %>
-                    </option>
+
+    <div class="book-container">
+        <h3>Book an Appointment</h3>
+        <form action="/appointments" method="POST ">
+            <div class="book ">
+                <label for="doctor-select ">Select Doctor:</label>
+                <select id="doctor-select " name="doctor_id " required>
+        <option value=" ">-- Select a Doctor --</option>
+        <% doctor.forEach(function(doctor) { %> <!-- Loop through each doctor -->
+            <option value="<%=doctor.Doctor_id %>">
+        <%= doctor.Names %> -
+            <%= doctor.specialization %>
+                </option>
                 <% }); %>
-            </select>
-        </div>
+                    </select>
+            </div>
 
-        <div>
-            <label for="appointment-date">Appointment Date:</label>
-            <input type="date" id="appointmentdate" name="appointment_date" required />
-        </div>
 
-        <div>
-            <label for="appointment-time">Appointment Time:</label>
-            <input type="time" id="appointmenttime" name="appointment_time" required />
-        </div>
+            <div class="book">
+                <label for="appointment-date">Appointment Date:</label>
+                <input type="date" id="appointmentdate" name="appointment_date" required />
+            </div>
 
-        <input type="hidden" name="patient_id" value="<%= user.id %>" />
+            <div class="book">
+                <label for="appointment-time">Appointment Time:</label>
+                <input type="time" id="appointmenttime" name="appointment_time" required />
+            </div>
+            <input type="hidden" name="patient_id" value="<%= user.id %>" />
 
-        <button type="submit">Book Appointment</button>
-    </form>
 
-    <br />
-    <a href="/logout">Logout</a>
+            <button type="submit">Book Appointment</button>
+        </form>
+
+        <br />
+        <a href="/logout">Logout</a>
+    </div>
 </body>
 
 </html>

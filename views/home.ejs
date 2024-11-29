@@ -15,29 +15,17 @@
 </head>
 <div class="container-home">
     <nav>
-        <div class="nav-logo-home">Telemedicine
+        <div class="nav-logo-home">TeleCare Connect
+            <p>Bringing Healthcare Closer Through Technology.</p>
         </div>
         <ul class="nav-links">
-            <li class="links"><a href="">Home</a></li>
-            <li class="links"><a href="">About Us</a></li>
-            <li class="links"> <a href="">Doctors</a></li>
-            <li class="links"> <a href="/appointment/app">Appointments</a></li>
-            <li class="links"> <a href="">Contacts</a></li>
+            <li class="links"><a href=>Home</a></li>
+            <li class="links"><a href=>About Us</a></li>
+            <li class="links"> <a href=>Appointments</a></li>
+            <li class="links"> <a href=>Contacts</a></li>
         </ul>
-        <!-- Profile dropdown -->
-        <div class="user">
-            <div class="profile-dropdown">
-                <span class="profile-icon"><box-icon type='solid' name='user-circle'></box-icon></span>
-                <div class="dropdown-content">
-                    <p>
-                        <%= user.first_name %>
-                            <%= user.last_name %>
-                    </p>
-                    <a href="/login/logout" class="btn logout-btn">Logout</a>
-                </div>
-            </div>
-        </div>
-
+        <button class="btn"><a href="/patients/register">Register</a></button>
+        <button class="btn"> <a href="/Login">Login</a></button>
     </nav>
     <header class="header-home">
         <div class="content-home">

@@ -184,7 +184,7 @@ router.get('/doctor/appointments', async(req, res) => {
         res.render('doctor_appointments', { user, appointments });
     } catch (err) {
         console.error('Error fetching appointments:', err);
-        res.status(500).send('Error fetching appointments');
+        res.status(500).send('Error fenode hing appointments');
     }
 });
 

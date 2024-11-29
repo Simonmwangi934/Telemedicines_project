@@ -7,6 +7,25 @@ router.use((req, res, next) => {
     next();
 });
 
+// Route to display the booking form
+router.get("/book", (req, res) => {
+    res.render("appointment"); // Render the appointment.ejs file
+});
+// Route to display the list of patients
+router.get('/appointment', function(req, res, next) {
+    // Query to fetch all doctors
+    const query = "SELECT Doctor_id, Names, specialization FROM doctor";
+
+    req.db.query(query, function(error, data) {
+        if (error) {
+            console.error('Error fetching doctors:', error.message);
+            res.status(500).send('Internal Server Error');
+        } else {
+            // Render the appointment page and pass the doctors array
+            res.render('appointment', { doctor: data });
+        }
+    });
+});
 
 // POST route for booking an appointment
 router.post('/', async(req, res) => {
@@ -24,7 +43,7 @@ router.post('/', async(req, res) => {
         await req.db.promise().query(query, values);
 
         // Redirect the user to the appointments page
-        res.redirect('/patients/appointments');
+        //res.redirect('/patients/appointments');
     } catch (err) {
         console.error('Error booking appointment:', err);
         res.status(500).send('Error booking appointment');
@@ -106,4 +125,5 @@ router.get("/app", function(req, res, next) {
     });
 });
 
+module.exports = router;
 module.exports = router;

@@ -10,9 +10,11 @@ const patientRoutes = require("./routes/patients"); // Import patient routes
 const loginRoutes = require("./routes/login"); // Import login routes
 const mainRoutes = require("./routes/main"); // Import main form routes
 const doctorsRoutes = require("./routes/doctors"); // Import main form routes
+const homeRoute = require("./routes/home"); // Import home form routes
+
 // Initialize Express app
 const app = express();
-const port = 659; // Port for the server
+const port = 991; // Port for the server
 const session = require('express-session');
 
 // Configure session middleware
@@ -22,6 +24,10 @@ app.use(session({
     saveUninitialized: true, // Save uninitialized sessions
     cookie: { secure: false } // Set to 'true' for HTTPS, or leave 'false' for local development
 }));
+app.use((req, res, next) => {
+    res.locals.user = req.session.user || null; // Set user as null if not logged in
+    next();
+});
 
 // Middleware setup
 app.use(express.static(path.join(__dirname, "public"))); // Serve static files from the public directory
@@ -61,17 +67,13 @@ db.connect((err) => {
         console.log(`Server is running on port ${port}`);
     });
 });
-const appointmentsRoutes = require("./routes/appointment"); // Import appointments route
-
-// Use the appointments routes
-app.use("/appointments", appointmentsRoutes); // Use appointments route for /appointments URL
-
-// Use patient routes
+// Use routes
 app.use("/patients", patientRoutes); // Route group for all patient-related routes
 app.use("/login", loginRoutes); // Route group for all login-related routes
 app.use("/main", mainRoutes); // Route group for all home form routes
 app.use("/doctor", doctorsRoutes);
 app.use("/appointment", appointmentRoutes);
+app.use("/home", homeRoute);
 
 // Export the app for testing or further configurations if needed
 module.exports = app;

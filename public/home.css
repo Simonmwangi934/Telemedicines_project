@@ -33,6 +33,11 @@
         transition: 0.3s;
     }
     
+    .btn a {
+        text-decoration: none;
+        color: #111827;
+    }
+    
     .container-home {
         max-width: 1200px;
         margin: auto;
@@ -53,6 +58,14 @@
         font-size: 1.5rem;
         font-weight: 600;
         color: var(--primary-color);
+    }
+    
+    .nav-logo-home p {
+        font-size: 1rem;
+        font-weight: 400;
+        color: var(--secondary-color);
+        margin-top: 0.5rem;
+        margin-bottom: 0;
     }
     
     .nav-links {
@@ -420,4 +433,56 @@
         font-size: 15px;
         padding: 1rem;
         font-weight: 400;
+    }
+    /* Style for the profile dropdown */
+    
+    .profile-dropdown {
+        position: relative;
+        display: inline-block;
+    }
+    
+    .profile-icon {
+        cursor: pointer;
+        font-size: 35px;
+        color: black;
+        background-color: #111827;
+    }
+    
+    .dropdown-content {
+        display: none;
+        /* Hide the dropdown initially */
+        position: absolute;
+        top: 100%;
+        /* Position the dropdown below the icon */
+        right: 0;
+        background-color: #f9f9f9;
+        min-width: 160px;
+        border: 1px solid #ddd;
+        box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+        z-index: 1;
+        padding: 10px;
+    }
+    
+    .profile-dropdown:hover .dropdown-content {
+        display: block;
+        /* Show dropdown on hover */
+    }
+    /* Style for logout button */
+    
+    .btn.logout-btn {
+        text-decoration: none;
+        color: #333;
+        padding: 8px 16px;
+        background-color: #f1f1f1;
+        border-radius: 4px;
+        display: block;
+        margin-top: 8px;
+    }
+    
+    .btn.logout-btn:hover {
+        background-color: #ddd;
+    }
+    
+    span box-icon {
+        color: black;
     }
